@@ -104,12 +104,17 @@ function send(req, res, next) {
 	if(state < 0)
 		result += "scheduled to be ";
 	result += state;
+	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.send(result);
 	return next();
 }
 
-server.get('/:char', send);
-server.get('/',function (req, res, next){
+server.get('/', function (req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.send("State is " + state);
 	return next();
 });
+
+server.get('/:char', send);
