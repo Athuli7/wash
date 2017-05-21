@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>Washing Machine Control Interface</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="result">
+		
+	</div>
+	<button id="wash">Wash</button><br>
+	<button id="spin">Spin</button><br>
+	<button id="dump">Dump</button><br>
+	<button id="end">End</button><br>
+	<button id="stat">State</button><br>
+	<script type="text/javascript">
+		var url = "http://laptop.athulraj.com:9001/";
+		$('#wash').click(function () {
+			$.get( url + "W", function( data ) {
+				$( "#result" ).html( data );
+			});
+		});
+		$('#dump').click(function () {
+			$.get( url + "D", function( data ) {
+				$( "#result" ).html( data );
+			});
+		});
+		$('#spin').click(function () {
+			$.get( url + "S", function( data ) {
+				$( "#result" ).html( data );
+			});
+		});
+		$('#end').click(function () {
+			$.get( url + "E", function( data ) {
+				$( "#result" ).html( data );
+			});
+		});
+		$('#state').click(function () {
+			$.get( url, function( data ) {
+				$( "#result" ).html( data );
+			});
+		});
+	</script>
+</body>
+</html>
