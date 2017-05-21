@@ -39,6 +39,11 @@
 				$( "#result" ).html( data );
 			});
 		});
+		setInterval(function () {
+			$.get( url, function( data ) {
+				$( "#result" ).html( data );
+			});
+		},5000);
 	</script>
 </body>
 </html>

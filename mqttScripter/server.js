@@ -12,6 +12,27 @@ var spiningSwitchS = 30;
 
 var state = 0;
 
+function stateInWords(inp){
+	var output = "";
+	if (inp < 0)
+		output += "scheduled to be ";
+	switch(inp){
+		case 0 : 
+			output += "idling"; break;
+		case -1 :
+		case 1 : 
+		case 2 : 
+			output += "washing"; break;
+		case -3 :
+		case 3 : 
+		case 4 : 
+			output += "spining"; break;
+		case 5 : 
+			output += "dumping"; break;
+	}
+	return output;
+}
+
 function sendCommands(){
 	switch(state){
 		case 0 : 
@@ -101,9 +122,7 @@ function send(req, res, next) {
 		break;
 	}
 	var result = req.params.char + " : State is now ";
-	if(state < 0)
-		result += "scheduled to be ";
-	result += state;
+	result += stateInWords(state);
 	res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.send(result);
@@ -113,7 +132,7 @@ function send(req, res, next) {
 server.get('/', function (req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	res.send("State is " + state);
+	res.send("State is now " + stateInWords(state));
 	return next();
 });
 
